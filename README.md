@@ -23,12 +23,18 @@ graph TD
 
 ## Quick Start
 
-TODO
+Some temporary notes for whoever sees this / future me:
+1. The starting container is debian.
+2. Use the docker compose file please.
+3. See TODO for planned tasks.
+4. Please branch off main.
+5. I'm still messing with the requirements.txt and some random things that I don't quite understand yet.
+6. I don't understand the Dockerfile really too much at all.
 
 
 ## Contributing
 
-TODO
+See [CONTRIBUTING](CONTRIBUTING).
 
 
 ## License
