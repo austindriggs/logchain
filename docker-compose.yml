@@ -1,20 +1,20 @@
 services:
 
-  logchain-agent:
-    build: .
-    container_name: logchain_agent
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ./data:/app/data
-      - ./config.yaml:/app/config.yaml
-    environment:
-      - NOTIFY_URL=${NOTIFY_URL}
-      - LOG_LEVEL=INFO
-    restart: unless-stopped
-  
-  # logchain-web:
+  # logchain-agent:
   #   build: .
-  #   container_name: logchain_web
+  #   container_name: logchain_agent
   #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #     - ./data:/app/data
+  #     - ./config.yaml:/app/config.yaml
   #   environment:
-  #   restart: unless_stoped
+  #     - NOTIFY_URL=${NOTIFY_URL}
+  #     - LOG_LEVEL=INFO
+  #   restart: unless-stopped
+  
+  logchain-web:
+    build: .
+    ports:
+      - "5000:5000"
+    container_name: logchain_web
+    restart: unless-stopped

@@ -31,9 +31,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY src/ ./src/
 COPY logchain.yaml .
 
-# Expose the port Flask is listening on
 EXPOSE 5000
 
 # Run directly with Python
-# Make sure app.run(host='0.0.0.0') is in your app.py
 CMD ["python", "src/app.py"]
