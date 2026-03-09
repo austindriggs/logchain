@@ -1,0 +1,68 @@
+# LogChain Configuration
+monitoring:
+  scan_interval_ms: 1000
+  
+  excluded_containers:
+    - logchain_agent
+    # - uptime-kuma
+
+security:
+  hash_algorithm: "sha256" # Options: none other right now.
+
+  # Keywords that trigger immediate alerts
+  high_priority_keywords:
+    # --- Initial set of keywords ---
+    - "authentication failed"
+    - "root"
+    - "rm -rf"
+    - "sudo"
+    - "password changed"
+
+    # # --- Authentication & Access ---
+    # - "authentication failed"
+    # - "invalid password"
+    # - "login failure"
+    # - "failed password for"
+    # - "permission denied"
+    # - "unauthorized access"
+    # - "session opened for user root"
+    # - "ssh_exchange_identification"
+    
+    # # --- Privilege Escalation & Shells ---
+    # - "sudo"
+    # - "su -"
+    # - "visudo"
+    # - "nopasswd"
+    # - "pkexec"        # Common in Linux local privilege escalation exploits
+    # - "/bin/sh"
+    # - "/bin/bash"
+    # - "python -c 'import pty" # Common reverse shell pattern
+    
+    # # --- Destructive Actions ---
+    # - "rm -rf"
+    # - "chmod 777"
+    # - "chown root"
+    # - "shred"         # Used to securely delete logs/files
+    # - "dd if=/dev/zero"
+    # - "mkfs"
+    
+    # # --- System & Log Tampering ---
+    # - "password changed"
+    # - "passwd"
+    # - "crontab -e"
+    # - "history -c"    # Clearing bash history
+    # - "unset HISTFILE"
+    # - "truncate -s 0" # Zeroing out log files
+    # - "killall"
+    # - "service stop"
+    
+    # # --- Network & Data Exfiltration ---
+    # - "wget"
+    # - "curl"          # Often used to pull down exploit payloads
+    # - "nc -e"         # Netcat reverse shell
+    # - "nmap"          # Scanning from within a compromised container
+    # - "scp"
+
+notifications:
+  enabled: true
+  provider: "ntfy" # Options: ntfy, discord, pushover
