@@ -39,7 +39,7 @@ Ensure you have Docker (and Docker Compose) installed. Run:
 docker-compose up --build
 ```
 
-Once the container is running, LogChain will begin indexing existing logs and watching for new events. You can view the web interface at http://localhost:5000.
+Once the container is running, LogChain will begin indexing existing logs and watching for new events. You can view the web interface at http://localhost:5000. Run `docker-compose down` when finished.
 
 
 ## Contributing

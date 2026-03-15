@@ -2,6 +2,7 @@
 
 Thanks for contributing! Please keep some of these guidelines in mind when setting up, coding, and building!
 
+
 ## Setup the Repo
 
 Clone (using HTTPS):
@@ -54,6 +55,7 @@ You may want to add your user to the docker group:
 sudo usermod -aG docker $USER
 ```
 
+
 ## Making your Changes
 
 Checkout your own branch:
@@ -99,6 +101,12 @@ docker-compose up --build
 ```
 
 And then open the webpage https://localhost:5000/ in your browser to verify the container is running.
+
+When you are done running the container, run:
+```sh
+docker-compose down
+```
+
 
 ## Submitting Changes
 
