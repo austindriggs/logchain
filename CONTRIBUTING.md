@@ -70,21 +70,28 @@ A description of the files is found below:
 ```sh
 driggs@driggs-HP-PD:~/code/logchain$ tree
 .
-├── CONTRIBUTING        # todo
-├── Dockerfile          # todo
-├── LICENSE             # todo
-├── README.md           # todo
-├── TODO.md             # todo
-├── cpe493              # todo
-│   ├── README.md       # todo
-│   └── proposal.md     # todo
-├── docker-compose.yml  # todo
-├── logchain.yaml       # todo
-├── requirements.txt    # todo
-└── src                 # todo
-    └── app.py          # todo
-
-3 directories, 11 files
+├── CONTRIBUTING.md
+├── Dockerfile
+├── LICENSE.md
+├── README.md
+├── TODO.md
+├── cpe493
+│   ├── README.md
+│   ├── proposal.md
+│   └── status-260324.md
+├── docker-compose.yml
+├── logchain.yaml
+├── requirements.txt
+├── src
+│   ├── __init__.py
+│   ├── alert.py
+│   ├── app.py
+│   ├── chain.py
+│   └── log.py
+└── tools
+    ├── inject.py
+    ├── tamper.py
+    └── verify.py
 ```
 
 ## Run the Container
