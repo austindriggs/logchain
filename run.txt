@@ -1,8 +1,0 @@
-# build the container
-docker build -t <tag_name> .
-
-# run the container
-docker run -p 5000:5000 <tag_name>
-
-# or simply run
-docker-compose up --build
