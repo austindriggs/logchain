@@ -1,0 +1,36 @@
+:root {
+    /* Gruvbox Dark Palette */
+    --bg-hard: #1d2021;
+    --bg-soft: #282828;
+    --bg-light: #32302f;
+    --bg-element: #3c3836;
+    --bg-border: #504945;
+    
+    --fg-main: #ebdbb2;
+    --fg-muted: #a89984;
+    
+    --gb-red: #fb4934;
+    --gb-green: #b8bb26;
+    --gb-yellow: #fabd2f;
+    --gb-blue: #83a598;
+    --gb-orange: #fe8019;
+    --gb-aqua: #8ec07c;
+}
+
+/* Base Body Style applied everywhere */
+body { 
+    background-color: var(--bg-hard); 
+    color: var(--fg-main); 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    margin: 0;
+}
+
+/* Standard Link Hover */
+a { transition: color 0.2s; }
+a:hover { color: var(--gb-yellow); }
+
+/* Custom Scrollbar (Global) */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-hard); }
+::-webkit-scrollbar-thumb { background: var(--bg-border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gb-yellow); }

@@ -1,9 +1,6 @@
-/* Global Reset & Base */
+@import "theme.css";
+
 body { 
-    background-color: #1d2021; /* Gruvbox Dark Background */
-    color: #ebdbb2;           /* Gruvbox Foreground Text */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-    margin: 0;
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -15,14 +12,14 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #282828; /* Gruvbox Soft Black */
+    background-color: var(--bg-soft);
     padding: 0.8rem 2rem;
-    border-bottom: 1px solid #3c3836;
+    border-bottom: 1px solid var(--bg-element);
     flex-shrink: 0;
 }
 
 .nav-brand a {
-    color: #fb4934; /* Gruvbox Red */
+    color: var(--gb-red);
     font-size: 1.3rem;
     font-weight: bold;
     text-decoration: none;
@@ -36,12 +33,9 @@ body {
 }
 
 .nav-links a {
-    color: #a89984; /* Gruvbox Gray */
+    color: var(--fg-muted);
     text-decoration: none;
-    transition: color 0.2s;
 }
-
-.nav-links a:hover { color: #fabd2f; } /* Yellow on hover */
 
 /* Main Dashboard Grid */
 .dashboard-wrapper {
@@ -51,81 +45,110 @@ body {
     overflow: hidden;
 }
 
-/* Left & Right Panes */
 .log, .chain {
     padding: 20px;
-    overflow-y: visible;
-    border-right: 1px solid #3c3836;
+    overflow-y: auto;
+    border-right: 1px solid var(--bg-element);
 }
 
 h2 {
-    color: #fabd2f; /* Gruvbox Yellow */
+    color: var(--gb-yellow);
     font-size: 1.1rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-top: 0;
-    border-bottom: 1px solid #3c3836;
+    border-bottom: 1px solid var(--bg-element);
     padding-bottom: 10px;
 }
 
 /* Container Log Boxes */
 .container-log-box {
-    background: #32302f; /* Gruvbox Light Black */
-    border: 1px solid #504945;
-    margin-bottom: 15px;
+    background: var(--bg-light);
+    border: 1px solid var(--bg-border);
+    margin-bottom: 10px;
     border-radius: 4px;
-    display: flex;
-    flex-direction: column;
-    max-height: 150px;
+    position: relative;
+    
+    /* This allows the box itself to be the scroll container */
+    max-height: 500px;
+    overflow-y: auto; 
+    display: block; /* Ensures details behaves as a block container */
 }
 
+/* The clickable bar / Sticky Header */
+.container-log-box summary {
+    padding: 10px 15px;
+    background-color: var(--bg-element); 
+    cursor: pointer;
+    list-style: none;
+    
+    /* STICKY LOGIC */
+    position: -webkit-sticky; 
+    position: sticky;
+    top: 0;
+    z-index: 10; 
+    
+    /* Visual separation when stuck */
+    border-bottom: 1px solid var(--bg-border);
+}
+
+/* Remove default arrows */
+.container-log-box summary::-webkit-details-marker {
+    display: none;
+}
+
+/* Styling the Green H3 inside the summary */
 .container-log-box h3 {
-    font-size: 0.9rem;
     margin: 0;
-    padding: 8px 12px;
-    background: #3c3836;
-    color: #b8bb26; /* Gruvbox Green */
+    font-size: 0.9rem;
+    color: var(--gb-green);
+    display: inline;
 }
 
-pre {
-    background: #1d2021;
+/* The content that appears when opened */
+.log-content {
+    padding: 0; /* Let pre handle padding for cleaner look */
+}
+
+/* Change border color to Yellow when open */
+.container-log-box[open] {
+    border-color: var(--gb-yellow);
+}
+
+/* Ensure pre doesn't have its own scrollbar to prevent "double scroll" */
+.container-log-box pre {
+    background: var(--bg-hard);
     margin: 0;
-    padding: 10px;
+    padding: 15px;
     font-size: 0.85rem;
-    color: #ebdbb2;
-    overflow-y: auto;
+    color: var(--fg-main);
     white-space: pre-wrap;
+    overflow: visible; /* Let the parent .container-log-box handle scrolling */
 }
 
 /* Crypto Chain Styling */
-.chain-visualization {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding-top: 10px;
-}
-
 .chain-entry {
-    background: #32302f;
-    border: 1px solid #504945;
-    border-left: 4px solid #b8bb26;
-    padding: 12px;
+    background: var(--bg-light);
+    border: 1px solid var(--bg-border);
+    border-left: 4px solid var(--gb-green);
+    padding: 8px 12px; /* Slightly reduced padding */
+    margin-bottom: 8px;
     border-radius: 4px;
     font-family: 'Consolas', 'Monaco', monospace;
     font-size: 0.85rem;
+    
+    /* FIX: Prevent the box from stretching vertically */
+    flex: 0 0 auto; 
 }
 
-.chain-entry p { margin: 0; }
+.chain-entry p {
+    margin: 0; /* Ensures the paragraph doesn't push the box taller */
+    line-height: 1.2;
+}
 
 code {
-    color: #fe8019; /* Gruvbox Orange for hashes */
-    background: #3c3836;
+    color: var(--gb-orange);
+    background: var(--bg-element);
     padding: 2px 4px;
     border-radius: 3px;
 }
-
-/* Scrollbar styling */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: #1d2021; }
-::-webkit-scrollbar-thumb { background: #504945; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #fabd2f; }
