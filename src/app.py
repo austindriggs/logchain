@@ -23,6 +23,6 @@ def index():
 
 if __name__ == '__main__':
     # 0.0.0.0 allows the app to be accessible from outside the container
-    # Port 5000 is the default Flask port, but it can be changed if needed
+    # Port 5000 is the default Flask port, but it can be changed if needed (especially in the docker-compose.yml)
     # debug=True enables auto-reloading and better error messages during development, NOT production
     app.run(host='0.0.0.0', port=5000, debug=True)

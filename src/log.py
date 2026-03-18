@@ -8,12 +8,13 @@ import datetime
 captured_logs = {}
 
 
+# eventually this will get configured from the yaml file
 def remove_excluded_containers(containers):
-    # eventually this will get yaml stuff and then remove things
     containers = [c for c in containers if c.name != 'logchain_web']
     return containers
 
 
+# get logs for the last minute and return them in a dict of {container_name: logs}
 def get_logs():
     global captured_logs
     try:
@@ -24,7 +25,6 @@ def get_logs():
         new_logs = {}
         for container in containers:
             print(f"Getting logs for {container.name} ({container.id})")
-
             try:
                 new_logs[container.name] = container.logs(since=one_minute_ago).decode('utf-8')
             except Exception as e:
@@ -33,6 +33,7 @@ def get_logs():
         captured_logs = new_logs
     
     except Exception as e:
+        captured_logs = {}
         print(f"Error in background log capture: {e}")
             
     return captured_logs
@@ -40,6 +41,6 @@ def get_logs():
 
 # this runs as soon as 'import log' happens in app.py
 scheduler = BackgroundScheduler()
-scheduler.add_job(func=get_logs, trigger="interval", minutes=1)
+scheduler.add_job(func=get_logs, trigger="interval", minutes=10)
 scheduler.start()
 get_logs()

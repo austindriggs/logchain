@@ -15,7 +15,7 @@ services:
   logchain-web:
     build: .
     ports:
-      - "5000:5000"
+      - "8016:5000"
     container_name: logchain_web
     restart: unless-stopped
     volumes:
