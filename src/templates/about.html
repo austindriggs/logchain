@@ -4,17 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About LogChain</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='theme.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='about.css') }}">
 </head>
-<body>
-    <div class="container">
+<body class="gruvbox-dark">
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="{{ url_for('index') }}">LogChain Dashboard</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('alert') }}">Alerts</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="https://github.com/austindriggs/logchain/" target="_blank">GitHub</a></li>
+        </ul>
+    </nav>
+
+    <div class="about-container">
         <h1>LogChain: A Lightweight and Secure Docker Historian</h1>
-        <p>LogChain is a lightweight security tool that provides <strong>tamper-evident logging</strong> for Docker environments. 
-        It continuously monitors container logs, cryptographically chains each log entry to preserve an <strong>immutable record</strong>, 
-        and alerts administrators when suspicious activity or log tampering is detected.</p>
+
+        <p>LogChain is a lightweight security tool that provides tamper-evident logging for Docker environments. 
+            It continuously monitors container logs, cryptographically chains each log entry to preserve an immutable record, 
+            and alerts administrators when suspicious activity or log tampering is detected.</p>
         
-        <p>The system is designed for homelabs, edge devices, and small servers where maintaining trustworthy logs is critical 
-        but ease of use and flexibility is desired.</p>
+        <p>The system is designed for homelabs, edge devices, and small servers where maintaining trustworthy logs is critical but ease of
+            use and flexibility is desired.</p>
+
+        <p>See the <a href="https://github.com/austindriggs/logchain/" target="_blank">GitHub repo</a> for more information.</p>
+        
     </div>
 </body>
 </html>
