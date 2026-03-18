@@ -18,3 +18,5 @@ services:
       - "5000:5000"
     container_name: logchain_web
     restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock

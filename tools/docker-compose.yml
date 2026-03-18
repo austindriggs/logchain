@@ -1,0 +1,23 @@
+# this file is used to generate mock logs for testing and development
+
+services:
+  log-generator:
+    image: alpine
+    container_name: mock-log-producer
+    command: >
+      sh -c "while true; do
+        echo \"$(date --iso-8601=seconds) INFO - Application heartbeat: processing batch ID $$(random_id=$$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 8); echo $$random_id)\";
+        sleep 2;
+        echo \"$(date --iso-8601=seconds) WARN - High memory pressure detected on node-01\";
+        sleep 3;
+        echo \"$(date --iso-8601=seconds) ERROR - Failed to connect to database: connection timeout\";
+        sleep 5;
+      done"
+    restart: always
+
+  web-mock:
+    image: nginx:alpine
+    container_name: nginx-log-producer
+    ports:
+      - "8080:80"
+    restart: always

@@ -3,7 +3,7 @@ Flask==3.0.2
 PyYAML==6.0.1
 
 # Docker Integration (to monitor logs)
-docker==7.0.0
+docker>=7.0.0
 
 # Networking & Notifications
 requests==2.31.0
