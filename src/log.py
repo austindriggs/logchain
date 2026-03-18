@@ -1,6 +1,8 @@
 import docker
 from apscheduler.schedulers.background import BackgroundScheduler
+
 import sys
+import datetime
 
 
 captured_logs = {}
@@ -17,13 +19,14 @@ def get_logs():
     try:
         all_containers = docker.from_env().containers.list(all=True)
         containers = remove_excluded_containers(all_containers)
+        one_minute_ago = datetime.datetime.now() - datetime.timedelta(minutes=1)
 
         new_logs = {}
         for container in containers:
             print(f"Getting logs for {container.name} ({container.id})")
-            
+
             try:
-                new_logs[container.name] = container.logs().decode('utf-8')
+                new_logs[container.name] = container.logs(since=one_minute_ago).decode('utf-8')
             except Exception as e:
                 print(f"Error getting logs for {container.name}: {e}")
 

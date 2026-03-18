@@ -20,18 +20,26 @@
     <div class="dashboard-wrapper">
         <div class="log">
             <h2>Container Logs</h2>
-            {% for name, lines in logs.items() %}
-                <div class="container-log-box">
-                    <details>
-                        <summary>
-                            <h3>{{ name }}</h3>
-                        </summary>
-                        <div class="log-content">
-                            <pre>{% for line in lines %}{{ line }}{% endfor %}</pre>
-                        </div>
-                    </details>
-                </div>
-            {% endfor %}
+            {% if not logs %}
+                <p>No logs available. Please check back later.</p>
+            {% else %}
+                {% for name, lines in logs.items() %}
+                    <div class="container-log-box">
+                        <details>
+                            <summary>
+                                <h3>{{ name }}</h3>
+                            </summary>
+                            <div class="log-content">
+                                {% if not lines %}
+                                    <pre>No logs available for this container in the last minute.</pre>
+                                {% else %}
+                                    <pre>{% for line in lines %}{{ line }}{% endfor %}</pre>
+                                {% endif %}
+                            </div>
+                        </details>
+                    </div>
+                {% endfor %}
+            {% endif %}
         </div>
 
         <div class="chain">
