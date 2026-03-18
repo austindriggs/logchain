@@ -16,7 +16,7 @@ def get_logs():
     for container in containers:
         print(f"Getting logs for {container.name} ({container.id})")
         try:
-            all_logs[container.id] = container.logs().decode('utf-8')
+            all_logs[container.name] = container.logs().decode('utf-8')
         except Exception as e:
             print(f"Error getting logs for {container.name}: {e}")
         

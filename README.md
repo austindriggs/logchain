@@ -51,3 +51,7 @@ See [CONTRIBUTING](CONTRIBUTING).
 
 This project is licensed under the [MIT License](LICENSE).
 
+
+## AI Disclosure
+
+AI assistance was used in styling the webpages **only**. Nothing else was vibe coded.

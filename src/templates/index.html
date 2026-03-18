@@ -21,7 +21,7 @@
             <h2>Container Logs</h2>
             {% for name, lines in logs.items() %}
                 <div class="container-log-box">
-                    <h3>Container: {{ name }}</h3>
+                    <h3>{{ name }}</h3>
                     <pre>{% for line in lines %}{{ line }}{% endfor %}</pre>
                 </div>
             {% endfor %}

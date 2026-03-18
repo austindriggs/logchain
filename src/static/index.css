@@ -1,13 +1,13 @@
 /* Global Reset & Base */
 body { 
-    background-color: #121212; 
-    color: #e0e0e0; 
+    background-color: #1d2021; /* Gruvbox Dark Background */
+    color: #ebdbb2;           /* Gruvbox Foreground Text */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
     margin: 0;
     display: flex;
     flex-direction: column;
-    height: 100vh; /* Fill the whole screen */
-    overflow: hidden; /* Prevent the main page from scrolling; sections will scroll instead */
+    height: 100vh;
+    overflow: hidden;
 }
 
 /* Navbar */
@@ -15,14 +15,14 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #1a1a1a;
+    background-color: #282828; /* Gruvbox Soft Black */
     padding: 0.8rem 2rem;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid #3c3836;
     flex-shrink: 0;
 }
 
 .nav-brand a {
-    color: #00ffcc;
+    color: #fb4934; /* Gruvbox Red */
     font-size: 1.3rem;
     font-weight: bold;
     text-decoration: none;
@@ -36,18 +36,17 @@ body {
 }
 
 .nav-links a {
-    color: #aaa;
+    color: #a89984; /* Gruvbox Gray */
     text-decoration: none;
     transition: color 0.2s;
 }
 
-.nav-links a:hover { color: #00ffcc; }
+.nav-links a:hover { color: #fabd2f; } /* Yellow on hover */
 
 /* Main Dashboard Grid */
 .dashboard-wrapper {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Two equal halves */
-    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
     flex-grow: 1;
     overflow: hidden;
 }
@@ -55,45 +54,45 @@ body {
 /* Left & Right Panes */
 .log, .chain {
     padding: 20px;
-    overflow-y: auto; /* Allow individual sections to scroll */
-    border-right: 1px solid #222;
+    overflow-y: visible;
+    border-right: 1px solid #3c3836;
 }
 
 h2 {
-    color: #569cd6;
+    color: #fabd2f; /* Gruvbox Yellow */
     font-size: 1.1rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     margin-top: 0;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid #3c3836;
     padding-bottom: 10px;
 }
 
 /* Container Log Boxes */
 .container-log-box {
-    background: #1e1e1e;
-    border: 1px solid #333;
+    background: #32302f; /* Gruvbox Light Black */
+    border: 1px solid #504945;
     margin-bottom: 15px;
     border-radius: 4px;
     display: flex;
     flex-direction: column;
-    max-height: 300px;
+    max-height: 150px;
 }
 
 .container-log-box h3 {
     font-size: 0.9rem;
     margin: 0;
     padding: 8px 12px;
-    background: #252526;
-    color: #9cdcfe;
+    background: #3c3836;
+    color: #b8bb26; /* Gruvbox Green */
 }
 
 pre {
-    background: #000;
+    background: #1d2021;
     margin: 0;
     padding: 10px;
     font-size: 0.85rem;
-    color: #b5cea8;
+    color: #ebdbb2;
     overflow-y: auto;
     white-space: pre-wrap;
 }
@@ -107,9 +106,9 @@ pre {
 }
 
 .chain-entry {
-    background: #1a1a1a;
-    border: 1px solid #00ffcc44; /* Subtle glow */
-    border-left: 4px solid #00ffcc;
+    background: #32302f;
+    border: 1px solid #504945;
+    border-left: 4px solid #b8bb26;
     padding: 12px;
     border-radius: 4px;
     font-family: 'Consolas', 'Monaco', monospace;
@@ -119,14 +118,14 @@ pre {
 .chain-entry p { margin: 0; }
 
 code {
-    color: #ce9178; /* Classic VS Code string color */
-    background: #252526;
+    color: #fe8019; /* Gruvbox Orange for hashes */
+    background: #3c3836;
     padding: 2px 4px;
     border-radius: 3px;
 }
 
-/* Scrollbar styling for the dark theme */
+/* Scrollbar styling */
 ::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: #121212; }
-::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #00ffcc; }
+::-webkit-scrollbar-track { background: #1d2021; }
+::-webkit-scrollbar-thumb { background: #504945; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #fabd2f; }
