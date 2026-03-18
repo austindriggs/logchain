@@ -1,0 +1,16 @@
+body { 
+    background-color: #121212; 
+    color: #e0e0e0; 
+    font-family: sans-serif; 
+    padding: 40px; 
+    line-height: 1.6; 
+}
+
+h1 { 
+    color: #00ffcc; 
+}
+
+.container { 
+    max-width: 800px; 
+    margin: auto; 
+}

@@ -10,6 +10,11 @@ def about():
     return render_template('about.html')
 
 
+@app.route('/alert/')
+def alert():
+    return render_template('alert.html')
+
+
 @app.route('/')
 def index():
     container_logs = log.get_logs()

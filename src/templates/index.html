@@ -1,21 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Docker Log Viewer</title>
-    <style>
-        body { font-family: sans-serif; background: #1e1e1e; color: #d4d4d4; padding: 20px; }
-        .container-box { background: #252526; border: 1px solid #333; margin-bottom: 20px; padding: 15px; border-radius: 5px; }
-        h2 { color: #569cd6; border-bottom: 1px solid #333; }
-        pre { background: #000; padding: 10px; overflow-x: auto; color: #b5cea8; }
-    </style>
+    <title>LogChain</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
 </head>
 <body>
-    <h1>System Log Dashboard</h1>
-    {% for name, lines in logs.items() %}
-        <div class="container-box">
-            <h2>Container: {{ name }}</h2>
-            <pre>{% for line in lines %}{{ line }}{% endfor %}</pre>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="{{ url_for('index') }}">LogChain Dashboard</a>
         </div>
-    {% endfor %}
+        <ul class="nav-links">
+            <li><a href="{{ url_for('alert') }}">Alerts</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="https://github.com/austindriggs/logchain/" target="_blank">GitHub</a></li>
+        </ul>
+    </nav>
+
+    <div class="dashboard-wrapper">
+        <div class="log">
+            <h2>Container Logs</h2>
+            {% for name, lines in logs.items() %}
+                <div class="container-log-box">
+                    <h3>Container: {{ name }}</h3>
+                    <pre>{% for line in lines %}{{ line }}{% endfor %}</pre>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="chain">
+            <h2>Crypto Chain</h2>
+            <p>This section will display the cryptographic chain of log entries, showing how each log is linked to the previous one to ensure immutability and tamper-evidence.</p>
+            <!-- Fake Chain Visualization show below -->
+            <div class="chain-visualization">
+                <div class="chain-entry">
+                    <p><strong>Log Entry 1:</strong> Hash: abc123 | Prev Hash: 000000 | Timestamp: 2024-06-01 12:00:00</p>
+                </div>
+                <div class="chain-entry">
+                    <p><strong>Log Entry 2:</strong> Hash: def456 | Prev Hash: abc123 | Timestamp: 2024-06-01 12:01:00</p>
+                </div>
+                <div class="chain-entry">
+                    <p><strong>Log Entry 3:</strong> Hash: ghi789 | Prev Hash: def456 | Timestamp: 2024-06-01 12:02:00</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

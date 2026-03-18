@@ -1,0 +1,132 @@
+/* Global Reset & Base */
+body { 
+    background-color: #121212; 
+    color: #e0e0e0; 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Fill the whole screen */
+    overflow: hidden; /* Prevent the main page from scrolling; sections will scroll instead */
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1a1a1a;
+    padding: 0.8rem 2rem;
+    border-bottom: 1px solid #333;
+    flex-shrink: 0;
+}
+
+.nav-brand a {
+    color: #00ffcc;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    margin: 0;
+}
+
+.nav-links a {
+    color: #aaa;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover { color: #00ffcc; }
+
+/* Main Dashboard Grid */
+.dashboard-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal halves */
+    grid-template-rows: 1fr;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+/* Left & Right Panes */
+.log, .chain {
+    padding: 20px;
+    overflow-y: auto; /* Allow individual sections to scroll */
+    border-right: 1px solid #222;
+}
+
+h2 {
+    color: #569cd6;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 0;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+}
+
+/* Container Log Boxes */
+.container-log-box {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    max-height: 300px;
+}
+
+.container-log-box h3 {
+    font-size: 0.9rem;
+    margin: 0;
+    padding: 8px 12px;
+    background: #252526;
+    color: #9cdcfe;
+}
+
+pre {
+    background: #000;
+    margin: 0;
+    padding: 10px;
+    font-size: 0.85rem;
+    color: #b5cea8;
+    overflow-y: auto;
+    white-space: pre-wrap;
+}
+
+/* Crypto Chain Styling */
+.chain-visualization {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 10px;
+}
+
+.chain-entry {
+    background: #1a1a1a;
+    border: 1px solid #00ffcc44; /* Subtle glow */
+    border-left: 4px solid #00ffcc;
+    padding: 12px;
+    border-radius: 4px;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.85rem;
+}
+
+.chain-entry p { margin: 0; }
+
+code {
+    color: #ce9178; /* Classic VS Code string color */
+    background: #252526;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+/* Scrollbar styling for the dark theme */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #121212; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #00ffcc; }
