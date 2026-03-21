@@ -11,16 +11,42 @@ This system provides three main features that make it unique from other solution
 ## Architecture
 
 ```mermaid
-<!-- graph TD
-    A[Docker Containers] -->|Stdout/Stderr| B(Docker Socket)
-    B --> C[LogChain Agent]
-    subgraph "The Chain Engine"
-    C --> D{Hash Logic}
-    D -->|H_n = SHA256 /H_n-1 + Data/| E[Immutable Ledger]
-    D --> F{Alerting Engine}
+graph TD
+    subgraph Docker_Environment [External Environment]
+        D[Docker Daemon]
+        C1[Container A]
+        C2[Container B]
     end
-    F -->|Tamper Detected| G[External Notification]
-    F -->|Keyword Match| G -->
+
+    subgraph LogChain_Core [src/log.py & src/chain.py]
+        S[Background Scheduler] -->|Every 60s| Poll[Fetch 1m Log Slice]
+        Poll --> Hash[Generate SHA-256 Hash]
+        Hash --> Combine{Combine with Prev Hash}
+        Combine --> Link[Create Cryptographic Link]
+    end
+
+    subgraph Storage [Persistent Data]
+        DB[(JSON/SQLite Store)]
+    end
+
+    subgraph Web_Interface [src/app.py]
+        UI[Flask Dashboard]
+        Theme[Gruvbox CSS]
+    end
+
+    %% Connections
+    D --- C1
+    D --- C2
+    Poll -.->|Read| D
+    Link -->|Save Link + Logs| DB
+    UI -->|Query| DB
+    Theme --> UI
+    
+    %% Styling
+    style Link fill:#b8bb26,stroke:#3c3836,color:#282828
+    style Hash fill:#fabd2f,stroke:#3c3836,color:#282828
+    style UI fill:#8ec07c,stroke:#3c3836,color:#282828
+    style D fill:#83a598,stroke:#3c3836,color:#fff
 ```
 
 
