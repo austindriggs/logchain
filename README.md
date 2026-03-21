@@ -1,13 +1,11 @@
 # LogChain: A Lightweight Docker Historian and Alerting System
 
-# LogChain: A Lightweight Docker Historian and Alerting System
-
-![License](https://img.shields.io/badge/license-MIT-8ec07c?style=flat-square)
+![Platform](https://img.shields.io/badge/Platform-Homelab-fe8019?style=flat-square&logo=homeassistant&logoColor=white)
 ![Python](https://img.shields.io/badge/python-3.11+-fabd2f?style=flat-square&logo=python&logoColor=282828)
 ![Docker](https://img.shields.io/badge/Docker-Enabled-83a598?style=flat-square&logo=docker&logoColor=white)
 ![Flask](https://img.shields.io/badge/Flask-3.0.2-ebdbb2?style=flat-square&logo=flask&logoColor=282828&labelColor=3c3836)
 ![Security](https://img.shields.io/badge/Security-SHA--256_Chained-fb4934?style=flat-square&logo=target&logoColor=white)
-![Platform](https://img.shields.io/badge/Platform-Homelab-fe8019?style=flat-square&logo=homeassistant&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-8ec07c?style=flat-square)
 
 LogChain continuously monitors Docker container logs, cryptographically chains each log entry to preserve an immutable record, and alerts administrators when suspicious activity or log tampering is detected.
 
