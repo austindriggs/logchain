@@ -1,14 +1,17 @@
-# LogChain: A Lightweight and Secure Docker Historian
+# LogChain: A Lightweight Docker Historian and Alerting System
 
-LogChain is a lightweight security tool that provides tamper-evident logging for Docker environments. It continuously monitors container logs, cryptographically chains each log entry to preserve an immutable record, and alerts administrators when suspicious activity or log tampering is detected.
+LogChain continuously monitors Docker container logs, cryptographically chains each log entry to preserve an immutable record, and alerts administrators when suspicious activity or log tampering is detected.
 
-The system is designed for homelabs, edge devices, and small servers where maintaining trustworthy logs is critical but ease of use and flexibility is desired.
+This system provides three main features that make it unique from other solutions:
+1. Written in Python and runs in Docker, providing flexibility for small servers, edge devices, and homelabs.
+2. Provides a user interface using Flask and an alerting system using ntfy.
+3. Free and open sourced, allowing users and admins to preserve, backup, and restore their data as they please.
 
 
 ## Architecture
 
 ```mermaid
-graph TD
+<!-- graph TD
     A[Docker Containers] -->|Stdout/Stderr| B(Docker Socket)
     B --> C[LogChain Agent]
     subgraph "The Chain Engine"
@@ -17,7 +20,7 @@ graph TD
     D --> F{Alerting Engine}
     end
     F -->|Tamper Detected| G[External Notification]
-    F -->|Keyword Match| G
+    F -->|Keyword Match| G -->
 ```
 
 
@@ -54,4 +57,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## AI Disclosure
 
-AI assistance was used in styling the webpages **only**. Nothing else was vibe coded.
+AI assistance was used in styling the webpages **only**. Nothing else was *vibe coded*.
