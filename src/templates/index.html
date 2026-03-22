@@ -7,12 +7,12 @@
 <body>
     <nav class="navbar">
         <div class="nav-brand">
-            <a href="{{ url_for('index') }}">LogChain Dashboard</a>
+            <a href="{{ url_for('index_page') }}">LogChain Dashboard</a>
         </div>
         <ul class="nav-links">
-            <li><a href="{{ url_for('index') }}">Home</a></li>
-            <li><a href="{{ url_for('alert') }}">Alerts</a></li>
-            <li><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="{{ url_for('index_page') }}">Home</a></li>
+            <li><a href="{{ url_for('alert_page') }}">Alerts</a></li>
+            <li><a href="{{ url_for('about_page') }}">About</a></li>
             <li><a href="https://github.com/austindriggs/logchain/" target="_blank">GitHub</a></li>
         </ul>
     </nav>
@@ -21,7 +21,7 @@
         <div class="log">
             <h2>Container Logs</h2>
             {% if not logs %}
-                <p>No logs available. Please check back later.</p>
+                <p>No logs available or error fetching logs.</p>
             {% else %}
                 {% for name, lines in logs.items() %}
                     <div class="container-log-box">
@@ -31,7 +31,7 @@
                             </summary>
                             <div class="log-content">
                                 {% if not lines %}
-                                    <pre>No logs available for this container in the last minute.</pre>
+                                    <pre>No logs available in last scan or during selected hash.</pre>
                                 {% else %}
                                     <pre>{% for line in lines %}{{ line }}{% endfor %}</pre>
                                 {% endif %}

@@ -10,28 +10,32 @@
 <body class="gruvbox-dark">
     <nav class="navbar">
         <div class="nav-brand">
-            <a href="{{ url_for('index') }}">LogChain Dashboard</a>
+            <a href="{{ url_for('index_page') }}">LogChain Dashboard</a>
         </div>
         <ul class="nav-links">
-            <li><a href="{{ url_for('index') }}">Home</a></li>
-            <li><a href="{{ url_for('alert') }}">Alerts</a></li>
-            <li><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="{{ url_for('index_page') }}">Home</a></li>
+            <li><a href="{{ url_for('alert_page') }}">Alerts</a></li>
+            <li><a href="{{ url_for('about_page') }}">About</a></li>
             <li><a href="https://github.com/austindriggs/logchain/" target="_blank">GitHub</a></li>
         </ul>
     </nav>
 
     <div class="about-container">
-        <h1>LogChain: A Lightweight and Secure Docker Historian</h1>
+        <h1>LogChain: A Docker Historian and Alerting System</h1>
 
-        <p>LogChain is a lightweight security tool that provides tamper-evident logging for Docker environments. 
-            It continuously monitors container logs, cryptographically chains each log entry to preserve an immutable record, 
+        <p>LogChain continuously monitors Docker container logs, cryptographically chains each log entry to preserve an immutable record, 
             and alerts administrators when suspicious activity or log tampering is detected.</p>
         
-        <p>The system is designed for homelabs, edge devices, and small servers where maintaining trustworthy logs is critical but ease of
-            use and flexibility is desired.</p>
+        <p>This system provides three main features that make it unique from other solutions:<br>
+        1. Written in Python and runs in Docker, providing flexibility for small servers, edge devices, and homelabs<br>
+        2. Provides a user interface using Flask and an alerting system using ntfy<br>
+        3. Free and open sourced, allowing users and admins to preserve, backup, and restore their data as they please.<br><br></p>
 
-        <p>See the <a href="https://github.com/austindriggs/logchain/" target="_blank">GitHub repo</a> for more information.</p>
-        
+        <h2>LICENSE</h2>
+        <p>This project is licensed under the MIT License.<br><br></p>
+
+        <h2>AI DISCLOSURE</h2>
+        <p>AI assistance was used in styling the webpages only. Nothing else was vibe coded.<br><br></p>
     </div>
 </body>
 </html>

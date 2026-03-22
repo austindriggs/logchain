@@ -29,7 +29,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the application source and config
 COPY src/ ./src/
-COPY logchain.yaml .
 
 EXPOSE 5000
 

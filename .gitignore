@@ -4,9 +4,9 @@ venv/
 *.py[cod]
 
 # logs and data
-*.log
-ledger.json
-.env
+#*.log
+#ledger.json
+#.env
 
 # OS
 .DS_Store

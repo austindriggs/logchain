@@ -1,3 +1,4 @@
+{% from 'bootstrap5/form.html' import render_form %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,20 +11,22 @@
 <body class="gruvbox-dark">
     <nav class="navbar">
         <div class="nav-brand">
-            <a href="{{ url_for('index') }}">LogChain Dashboard</a>
+            <a href="{{ url_for('index_page') }}">LogChain Dashboard</a>
         </div>
         <ul class="nav-links">
-            <li><a href="{{ url_for('index') }}">Home</a></li>
-            <li><a href="{{ url_for('alert') }}">Alerts</a></li>
-            <li><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="{{ url_for('index_page') }}">Home</a></li>
+            <li><a href="{{ url_for('alert_page') }}">Alerts</a></li>
+            <li><a href="{{ url_for('about_page') }}">About</a></li>
             <li><a href="https://github.com/austindriggs/logchain/" target="_blank">GitHub</a></li>
         </ul>
     </nav>
 
     <div class="alert-container">
         <h1>Alerts for LogChain</h1>
+        <p>Visit   <a href="{{ ntfy_address }}" target="_blank">{{ ntfy_address }}</a>   to view alerts.</p>
 
-        <p>Coming soon...</p>
+        <h2>MANUAL ALERTS</h2>
+        {{ render_form(manual_alert_form, form_type="horizontal") }}
         
     </div>
 </body>

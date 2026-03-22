@@ -10,7 +10,7 @@ captured_logs = {}
 
 # eventually this will get configured from the yaml file
 def remove_excluded_containers(containers):
-    containers = [c for c in containers if c.name != 'logchain_web']
+    containers = [c for c in containers if c.name != 'logchain']
     return containers
 
 
