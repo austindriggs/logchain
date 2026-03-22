@@ -11,7 +11,7 @@ LogChain continuously monitors Docker container logs, cryptographically chains e
 
 This system provides three main features that make it unique from other solutions:
 1. Written in Python and runs in [Docker](https://www.docker.com/), providing flexibility for small servers, edge devices, and [homelabs](https://github.com/austindriggs/homelab/).
-2. Provides a user interface using [Flask](https://flask.palletsprojects.com/) and an alerting system using [ntfy](https://ntfy.sh/)
+2. Provides hashing using [hashlib](https://docs.python.org/3/library/hashlib.html) (SHA-265), a user interface using [Flask](https://flask.palletsprojects.com/) and an alerting system using [ntfy](https://ntfy.sh/)
 3. Free and open sourced, allowing users and admins to preserve, backup, and restore their data as they please.
 
 
