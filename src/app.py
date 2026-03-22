@@ -1,11 +1,30 @@
-# https://flask.palletsprojects.com/en/stable/quickstart/
+# This is the main app file for Flask to serve everything.
+# It handles page routing, loaading env variables, form validation, and other basic functions.
+# See https://flask.palletsprojects.com/en/stable/quickstart/ for some useful information.
 
+
+##############################################################################
+# IMPORT MODULES AND LOAD ENV VARIABLES
+##############################################################################
+
+# imported libraries
+import os
+from dotenv import load_dotenv
 from flask import Flask, render_template, redirect, url_for
 from flask_wtf import FlaskForm, CSRFProtect
 from flask_bootstrap import Bootstrap5
 import secrets
+
+# load from .env file
+load_dotenv()
+
+# import local modules
 import log, alert
 
+
+##############################################################################
+# INITIALIZE FLASK APP AND HANDLE FORM SECRET KEY
+##############################################################################
 
 app = Flask(__name__)
 
@@ -16,6 +35,10 @@ csrf = CSRFProtect(app)
 bootstrap = Bootstrap5(app)
 
 
+##############################################################################
+# FLASK APP ROUTING AND PAGE HANDLING
+##############################################################################
+
 @app.route('/about/')
 def about_page():
     return render_template('about.html')
@@ -23,9 +46,6 @@ def about_page():
 
 @app.route('/alert/', methods=['GET', 'POST'])
 def alert_page():
-    alert.start_ntfy()
-    #alert.send_ntfy("Accessing alerts page", "User accessed the alerts page.", 1)
-
     manual_alert_form = alert.ManualAlert()
     if manual_alert_form.validate_on_submit():
         title = manual_alert_form.title.data
@@ -48,9 +68,6 @@ def index_page():
 
 
 if __name__ == '__main__':
-    # initialize background activities
-    #alert.start_ntfy()
-
     # 0.0.0.0 allows the app to be accessible from outside the container
     # Port 5000 is the default Flask port, but it can be changed if needed (especially in the docker-compose.yml)
     # debug=True enables auto-reloading and better error messages during development, NOT production

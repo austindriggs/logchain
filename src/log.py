@@ -1,20 +1,30 @@
+# captures docker logs, filters them, and returns them as called
+# right now, this is scheduled for SCAN_INTERVAL_MINUTES or every 10 minutes
+
+
+##############################################################################
+# IMPORT MODULES AND SETUP DICTIONARY
+##############################################################################
+
+import sys, os
+import datetime
 import docker
 from apscheduler.schedulers.background import BackgroundScheduler
 
-import sys
-import datetime
-
-
 captured_logs = {}
+SCAN_INTERVAL_MINUTES = os.getenv("SCAN_INTERVAL_MINUTES", 10)
 
 
-# eventually this will get configured from the yaml file
+##############################################################################
+# LOG FUNCTIONS AND SCHEDULER
+##############################################################################
+
 def remove_excluded_containers(containers):
+    # eventually this will get configured from the yaml file
     containers = [c for c in containers if c.name != 'logchain']
     return containers
 
 
-# get logs for the last minute and return them in a dict of {container_name: logs}
 def get_logs():
     global captured_logs
     try:
@@ -41,6 +51,6 @@ def get_logs():
 
 # this runs as soon as 'import log' happens in app.py
 scheduler = BackgroundScheduler()
-scheduler.add_job(func=get_logs, trigger="interval", minutes=10)
+scheduler.add_job(func=get_logs, trigger="interval", minutes=SCAN_INTERVAL_MINUTES)
 scheduler.start()
 get_logs()

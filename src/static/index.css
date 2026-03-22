@@ -89,7 +89,7 @@ h2 {
     z-index: 10; 
     
     /* Visual separation when stuck */
-    border-bottom: 1px solid var(--bg-border);
+    border-bottom: 4px solid var(--gb-green);
 }
 
 /* Remove default arrows */
