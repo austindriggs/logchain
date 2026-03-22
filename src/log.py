@@ -10,9 +10,13 @@ import sys, os
 import datetime
 import docker
 from apscheduler.schedulers.background import BackgroundScheduler
+from chain import LogChain
+
+historian = LogChain()
+master_ledger = []
 
 captured_logs = {}
-SCAN_INTERVAL_MINUTES = os.getenv("SCAN_INTERVAL_MINUTES", 10)
+LOGCHAIN_SCAN_MINUTES = os.getenv("LOGCHAIN_SCAN_MINUTES", 10)
 
 
 ##############################################################################
@@ -51,6 +55,6 @@ def get_logs():
 
 # this runs as soon as 'import log' happens in app.py
 scheduler = BackgroundScheduler()
-scheduler.add_job(func=get_logs, trigger="interval", minutes=SCAN_INTERVAL_MINUTES)
+scheduler.add_job(func=get_logs, trigger="interval", minutes=LOGCHAIN_SCAN_MINUTES)
 scheduler.start()
 get_logs()
