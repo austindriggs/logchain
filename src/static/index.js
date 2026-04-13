@@ -54,7 +54,6 @@ async function loadChain() {
         return;
     }
 
-    chain.reverse();
 
     chain.forEach((block, index) => {
         const div = document.createElement('div');

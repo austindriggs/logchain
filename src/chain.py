@@ -16,6 +16,7 @@ import os
 ##############################################################################
 
 chain = []
+last_logs = {}
 CHAIN_FILE = os.path.join(os.path.dirname(__file__), "chain.json")
 
 ##############################################################################
@@ -70,25 +71,45 @@ def load_chain():
 ##############################################################################
 
 def add_block():
-    global chain
+    global chain, last_logs
 
     logs = log.get_logs()
+    new_logs = {}
+
+    for container, text in logs.items():
+        prev = last_logs.get(container, "")
+
+        # get only new portion
+        if text.startswith(prev):
+            diff = text[len(prev):]
+        else:
+            # fallback if logs rotated or changed
+            diff = text
+
+        new_logs[container] = diff
+
+        # update stored logs
+        last_logs[container] = text
+
+    # optional: skip empty blocks
+    if all(v.strip() == "" for v in new_logs.values()):
+        return
+
     timestamp = datetime.datetime.utcnow().isoformat()
     previous_hash = get_latest_hash()
 
-    # deterministic serialization
-    block_string = serialize_block_data(timestamp, logs, previous_hash)
+    # deterministic serialization (USE new_logs!)
+    block_string = serialize_block_data(timestamp, new_logs, previous_hash)
     block_hash = sha256_text(block_string)
 
     block = {
         "timestamp": timestamp,
-        "logs": logs,
+        "logs": new_logs,
         "previous_hash": previous_hash,
         "block_hash": block_hash
     }
 
     chain.append(block)
-
     save_chain()
 
     return block
