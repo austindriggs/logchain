@@ -7,13 +7,16 @@
 
 import datetime
 import hashlib
-import log  # uses your existing log.py
+import log
+import json
+import os
 
 ##############################################################################
 # GLOBAL CHAIN STORAGE
 ##############################################################################
 
 chain = []
+CHAIN_FILE = os.path.join(os.path.dirname(__file__), "chain.json")
 
 ##############################################################################
 # HELPER FUNCTIONS
@@ -27,8 +30,40 @@ def sha256_text(text):
 
 def get_latest_hash():
     if not chain:
-        return "0" * 64  # genesis previous hash
+        return "0" * 64
     return chain[-1]["block_hash"]
+
+
+def serialize_block_data(timestamp, logs, previous_hash):
+    """Ensure consistent hashing (VERY IMPORTANT)"""
+    return json.dumps({
+        "timestamp": timestamp,
+        "logs": logs,
+        "previous_hash": previous_hash
+    }, sort_keys=True)
+
+
+def save_chain():
+    try:
+        with open(CHAIN_FILE, "w") as f:
+            json.dump(chain, f, indent=2)
+    except Exception as e:
+        print(f"Error saving chain: {e}")
+
+
+def load_chain():
+    global chain
+
+    if not os.path.exists(CHAIN_FILE):
+        chain = []
+        return
+
+    try:
+        with open(CHAIN_FILE, "r") as f:
+            chain = json.load(f)
+    except Exception as e:
+        print(f"Error loading chain: {e}")
+        chain = []
 
 ##############################################################################
 # CORE FUNCTION: ADD BLOCK
@@ -37,27 +72,24 @@ def get_latest_hash():
 def add_block():
     global chain
 
-    logs = log.get_hashed_logs()
+    logs = log.get_logs()
     timestamp = datetime.datetime.utcnow().isoformat()
-
     previous_hash = get_latest_hash()
 
-    block_data = {
-        "timestamp": timestamp,
-        "logs": logs,
-        "previous_hash": previous_hash
-    }
-
-    # stringify block content for hashing
-    block_string = f"{timestamp}{logs}{previous_hash}"
+    # deterministic serialization
+    block_string = serialize_block_data(timestamp, logs, previous_hash)
     block_hash = sha256_text(block_string)
 
     block = {
-        **block_data,
+        "timestamp": timestamp,
+        "logs": logs,
+        "previous_hash": previous_hash,
         "block_hash": block_hash
     }
 
     chain.append(block)
+
+    save_chain()
 
     return block
 
@@ -70,12 +102,15 @@ def validate_chain():
         current = chain[i]
         previous = chain[i - 1]
 
-        # check previous hash link
         if current["previous_hash"] != previous["block_hash"]:
             return False
 
-        # recompute hash
-        block_string = f"{current['timestamp']}{current['logs']}{current['previous_hash']}"
+        block_string = serialize_block_data(
+            current["timestamp"],
+            current["logs"],
+            current["previous_hash"]
+        )
+
         recalculated_hash = sha256_text(block_string)
 
         if current["block_hash"] != recalculated_hash:
@@ -89,3 +124,9 @@ def validate_chain():
 
 def get_chain():
     return chain
+
+##############################################################################
+# INIT
+##############################################################################
+
+load_chain()

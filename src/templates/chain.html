@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LogChain Viewer</title>
+    <style>
+        body {
+            display: flex;
+            font-family: Arial;
+        }
+        #left {
+            width: 40%;
+            border-right: 1px solid #ccc;
+            padding: 10px;
+            overflow-y: scroll;
+            height: 100vh;
+        }
+        #right {
+            width: 60%;
+            padding: 10px;
+        }
+        .block {
+            cursor: pointer;
+            padding: 5px;
+            border-bottom: 1px solid #eee;
+        }
+        .block:hover {
+            background: #f0f0f0;
+        }
+        pre {
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+
+<div id="left"></div>
+<div id="right">
+    <h2>Select a block</h2>
+</div>
+
+<script>
+async function loadChain() {
+    const res = await fetch('/api/chain/');
+    const data = await res.json();
+
+    const left = document.getElementById('left');
+    left.innerHTML = '';
+
+    data.forEach(block => {
+        const div = document.createElement('div');
+        div.className = 'block';
+
+        // show shortened hash
+        div.innerText = block.block_hash.substring(0, 20) + "...";
+
+        div.onclick = () => loadBlock(block.block_hash);
+
+        left.appendChild(div);
+    });
+}
+
+async function loadBlock(hash) {
+    const res = await fetch('/api/block/' + hash + '/');
+    const block = await res.json();
+
+    const right = document.getElementById('right');
+
+    right.innerHTML = `
+        <h2>Block</h2>
+        <b>Hash:</b> ${block.block_hash}<br>
+        <b>Previous:</b> ${block.previous_hash}<br>
+        <b>Timestamp:</b> ${block.timestamp}<br>
+        <h3>Logs:</h3>
+        <pre>${JSON.stringify(block.logs, null, 2)}</pre>
+    `;
+}
+
+loadChain();
+</script>
+
+</body>
+</html>

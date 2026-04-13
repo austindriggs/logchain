@@ -152,3 +152,6 @@ code {
     padding: 2px 4px;
     border-radius: 3px;
 }
+.chain-entry.active {
+    border: 2px solid white;
+}
