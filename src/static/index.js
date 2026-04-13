@@ -92,26 +92,40 @@ async function loadChain() {
 
 let currentBlockHash = null;
 
+function showContainerLogs(containerName) {
+    const logContent = document.getElementById('log-content');
+
+    if (!window.currentBlock) return;
+
+    const logs = window.currentBlock.logs[containerName] || "No logs";
+
+    logContent.innerHTML = `
+        <button onclick="loadLogs(window.currentBlock)">⬅ Back</button>
+        <h3>${containerName}</h3>
+        <pre>${logs}</pre>
+    `;
+}
+
 function loadLogs(block) {
     const logContent = document.getElementById('log-content');
 
-    // 🔁 If clicking same block again → clear logs
-    if (currentBlockHash === block.block_hash) {
-        logContent.innerHTML = "<p>Select a block to view logs.</p>";
-        currentBlockHash = null;
-        return;
+    if (!logContent) return;
+
+    // show container list first
+    let html = "<h3>Select a container</h3>";
+
+    for (const container in block.logs) {
+        html += `
+            <div class="container-entry" onclick="showContainerLogs('${container}')">
+                ${container}
+            </div>
+        `;
     }
 
-    // otherwise show logs
-    currentBlockHash = block.block_hash;
+    logContent.innerHTML = html;
 
-    let logsText = "";
-
-    for (const [container, log] of Object.entries(block.logs)) {
-        logsText += `=== ${container} ===\n${log}\n\n`;
-    }
-
-    logContent.innerHTML = `<pre>${logsText}</pre>`;
+    // store current block globally
+    window.currentBlock = block;
 }
 
 // ===============================

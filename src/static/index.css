@@ -155,3 +155,12 @@ code {
 .chain-entry.active {
     border: 2px solid white;
 }
+.container-entry {
+    padding: 8px;
+    border-bottom: 1px solid #444;
+    cursor: pointer;
+}
+
+.container-entry:hover {
+    background-color: rgba(255,255,255,0.1);
+}
