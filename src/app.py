@@ -69,6 +69,11 @@ def alert_page():
         ntfy_address=alert.get_ntfy(),
         manual_alert_form=manual_alert_form
     )
+@app.route('/test-alert/')
+def test_alert():
+    import alert
+    alert.send_ntfy("TEST ALERT", "This is working", priority=5)
+    return "sent"
 
 ##############################################################################
 # API ROUTES (CHAIN DATA)

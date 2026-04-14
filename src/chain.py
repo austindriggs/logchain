@@ -10,6 +10,7 @@ import hashlib
 import log
 import json
 import os
+import solar_alerts
 
 ##############################################################################
 # GLOBAL CHAIN STORAGE
@@ -90,11 +91,13 @@ def add_block():
 
         # update stored logs
         last_logs[container] = text
-
+    
     # optional: skip empty blocks
     if all(v.strip() == "" for v in new_logs.values()):
         return
-
+    # Comment out to remove solar alerts
+    solar_alerts.check_solar_alerts(new_logs)
+    
     timestamp = datetime.datetime.utcnow().isoformat()
     previous_hash = get_latest_hash()
 
