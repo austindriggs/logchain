@@ -6,7 +6,7 @@ venv/
 # logs and data
 #*.log
 #ledger.json
-#.env
+.env
 
 # OS
 .DS_Store
