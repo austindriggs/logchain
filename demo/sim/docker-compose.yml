@@ -60,9 +60,14 @@ services:
       done"
     restart: always
 
-  log-generator:
-    image: alpine
+  solar-alert-trigger:
+    image: python:3.11-slim
     container_name: solar-alert-producer
+    working_dir: /app
+    environment:
+      - PYTHONPATH=/app
+    volumes:
+      - .:/app
     command: >
       sh -c "while true; do
         python solar_alerts.py;
@@ -74,16 +79,20 @@ services:
     image: python:3.11-slim
     container_name: solar-log-producer
     working_dir: /app
-    command: python solar_sim.py
+    environment:
+      - PYTHONPATH=/app
     volumes:
       - .:/app
+    command: python solar_sim.py
     restart: always
     
   cloud-sim:
     image: python:3.11-slim
     container_name: cloud-log-producer
     working_dir: /app
-    command: python cloud_sim.py
+    environment:
+      - PYTHONPATH=/app
     volumes:
       - .:/app
+    command: python cloud_sim.py
     restart: always
