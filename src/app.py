@@ -1,9 +1,14 @@
 # This is the main app file for Flask to serve everything.
+# It handles page routing, loaading env variables, form validation, and other basic functions.
+# See https://flask.palletsprojects.com/en/stable/quickstart/ for some useful information.
+
+
 
 ##############################################################################
 # IMPORT MODULES AND LOAD ENV VARIABLES
 ##############################################################################
 
+# import standard libraries
 import os
 from dotenv import load_dotenv
 from flask import Flask, render_template, redirect, url_for, jsonify
@@ -17,6 +22,8 @@ load_dotenv()
 # import local modules
 import log, alert, chain
 
+
+
 ##############################################################################
 # INITIALIZE FLASK APP
 ##############################################################################
@@ -27,14 +34,14 @@ app.secret_key = secrets.token_urlsafe(16)
 csrf = CSRFProtect(app)
 bootstrap = Bootstrap5(app)
 
+
+
 ##############################################################################
 # ROUTES
 ##############################################################################
 
 @app.route('/')
 def index_page():
-    # ✅ KEEP your existing layout
-    # but REMOVE passing raw logs
     return render_template('index.html')
 
 
@@ -69,11 +76,14 @@ def alert_page():
         ntfy_address=alert.get_ntfy(),
         manual_alert_form=manual_alert_form
     )
+
 @app.route('/test-alert/')
 def test_alert():
     import alert
     alert.send_ntfy("TEST ALERT", "This is working", priority=5)
     return "sent"
+
+
 
 ##############################################################################
 # API ROUTES (CHAIN DATA)
@@ -83,13 +93,14 @@ def test_alert():
 def api_chain():
     return jsonify(chain.get_chain())
 
-
 @app.route('/api/block/<block_hash>/')
 def api_block(block_hash):
     for block in chain.get_chain():
         if block["block_hash"] == block_hash:
             return jsonify(block)
     return jsonify({"error": "Block not found"}), 404
+
+
 
 ##############################################################################
 # RUN APP

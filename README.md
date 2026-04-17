@@ -79,6 +79,11 @@ services:
     restart: unless-stopped
 ```
 
+Also create your own `.env` file:
+```bash
+cp .env-example .env
+```
+
 Ensure you have Docker (and Docker Compose) installed. Run:
 ```sh
 docker-compose up --build

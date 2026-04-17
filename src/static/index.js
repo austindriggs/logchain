@@ -61,10 +61,11 @@ async function loadChain() {
 
         div.innerHTML = `
             <p>
-                <strong>Block ${index + 1}</strong><br>
-                Hash: ${block.block_hash.substring(0, 16)}...<br>
-                Prev: ${block.previous_hash.substring(0, 16)}...<br>
-                Time: ${block.timestamp}
+                <div style="padding-bottom: 2px; margin-bottom: 4px; font-weight: bold;">
+                    ${block.timestamp}
+                </div>
+                Hash: ${block.block_hash}<br>
+                Prev: ${block.previous_hash}<br>
             </p>
         `;
 
@@ -110,9 +111,7 @@ function loadLogs(block) {
 
     if (!logContent) return;
 
-    // show container list first
-    let html = "<h3>Select a container</h3>";
-
+    let html = "";
     for (const container in block.logs) {
         html += `
             <div class="container-entry" onclick="showContainerLogs('${container}')">
@@ -132,5 +131,5 @@ function loadLogs(block) {
 // ===============================
 window.addEventListener('DOMContentLoaded', () => {
     loadChain();
-    setInterval(loadChain, 5000);
+    setInterval(loadChain, 60000);
 });

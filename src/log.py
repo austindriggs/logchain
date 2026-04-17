@@ -2,6 +2,7 @@
 # right now, this is scheduled for SCAN_INTERVAL_MINUTES or every 10 minutes
 
 
+
 ##############################################################################
 # IMPORT MODULES AND SETUP DICTIONARY
 ##############################################################################
@@ -13,6 +14,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 
 captured_logs = {}
 SCAN_INTERVAL_MINUTES = os.getenv("SCAN_INTERVAL_MINUTES", 1)
+
 
 
 ##############################################################################
@@ -47,6 +49,7 @@ def get_logs():
         print(f"Error in background log capture: {e}")
     
     return captured_logs
+
 
 
 # this runs as soon as 'import log' happens in app.py
