@@ -49,3 +49,30 @@ services:
     ports:
       - "8085:80"
     restart: always
+  log-generator:
+    image: alpine
+    container_name: mock-log-producer
+    command: >
+      sh -c "while true; do
+        echo \"$$(date +%Y-%m-%dT%H:%M:%S) INFO Random value: $$((RANDOM % 1000))\";
+        sleep 2;
+      done"
+    restart: always
+    
+  solar-sim:
+    image: python:3.11-slim
+    container_name: solar-log-producer
+    working_dir: /app
+    command: python solar_sim.py
+    volumes:
+      - .:/app
+    restart: always
+    
+  cloud-sim:
+    image: python:3.11-slim
+    container_name: cloud-log-producer
+    working_dir: /app
+    command: python cloud_sim.py
+    volumes:
+      - .:/app
+    restart: always

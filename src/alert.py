@@ -2,6 +2,7 @@
 # See https://ntfy.sh/ for more information on ntfy and how to set it up.
 
 
+
 ##############################################################################
 # IMPORT ALL LIBRARIES AND MODULES
 ##############################################################################
@@ -11,6 +12,7 @@ import os
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, IntegerField, SubmitField
 from wtforms.validators import DataRequired
+
 
 
 ##############################################################################
@@ -27,6 +29,8 @@ class ManualAlert(FlaskForm):
     priority = IntegerField('Priority', validators=[DataRequired()])
     author = StringField('Author', validators=[DataRequired()])
     submit = SubmitField('Submit')
+
+
 
 ##############################################################################
 # ALERT FUNCTIONS

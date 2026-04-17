@@ -18,42 +18,51 @@ This system provides three main features that make it unique from other solution
 ## ARCHITECTURE
 
 ```mermaid
-graph TD
-    subgraph Docker_Environment [External Environment]
-        D[Docker Daemon]
-        C1[Container A]
-        C2[Container B]
-    end
+flowchart TD
 
-    subgraph LogChain_Core [src/log.py & src/chain.py]
-        S[Background Scheduler] -->|Every 60s| Poll[Fetch 1m Log Slice]
-        Poll --> Hash[Generate SHA-256 Hash]
-        Hash --> Combine{Combine with Prev Hash}
-        Combine --> Link[Create Cryptographic Link]
-    end
+%% DATA SOURCES
+A["Docker Containers
+(Simulated Solar Panel, etc)"]
 
-    subgraph Storage [Persistent Data]
-        DB[(JSON/SQLite Store)]
-    end
 
-    subgraph Web_Interface [src/app.py]
-        UI[Flask Dashboard]
-        Theme[Gruvbox CSS]
-    end
+%% LOG COLLECTION
+C[log.py 
+Get Container Logs]
 
-    %% Connections
-    D --- C1
-    D --- C2
-    Poll -.->|Read| D
-    Link -->|Save Link + Logs| DB
-    UI -->|Query| DB
-    Theme --> UI
-    
-    %% Styling
-    style Link fill:#b8bb26,stroke:#3c3836,color:#282828
-    style Hash fill:#fabd2f,stroke:#3c3836,color:#282828
-    style UI fill:#8ec07c,stroke:#3c3836,color:#282828
-    style D fill:#83a598,stroke:#3c3836,color:#fff
+%% PROCESSING
+D["Extract New Logs (Scheduled and new only)"]
+E["solar_alerts.py
+(Test  to Detect Faults)"]
+F["alert.py 
+(Send ntfy Notification)"]
+
+%% BLOCKCHAIN
+G["Create Block
+(timestamp, logs, and prev_hash)"]
+H["Hash Block with (SHA256)"]
+I[Append to Chain]
+J["Save chain.json
+(Log the Chain)"]
+
+%% UI + API
+
+L["Web UI 
+(Block Viewer and Alert Interface)"]
+
+%% FLOW CONNECTIONS
+A --> C
+C --> D
+D --> G
+G --> H
+H --> I
+I --> J
+
+%% ALERT FLOW
+I --> E
+E --> F
+
+%% UI FLOW
+I --> L
 ```
 
 
@@ -68,6 +77,11 @@ services:
       - "5000:5000"
     container_name: logchain_web
     restart: unless-stopped
+```
+
+Also create your own `.env` file:
+```bash
+cp .env-example .env
 ```
 
 Ensure you have Docker (and Docker Compose) installed. Run:

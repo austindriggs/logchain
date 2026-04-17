@@ -18,100 +18,23 @@
     </nav>
 
     <div class="dashboard-wrapper">
-        <div class="log">
-            <h2>Container Logs</h2>
-            {% if not logs %}
-                <p>No logs available or error fetching logs.</p>
-            {% else %}
-                {% for name, lines in logs.items() %}
-                    <div class="container-log-box">
-                        <details>
-                            <summary>
-                                <h3>{{ name }}</h3>
-                            </summary>
-                            <div class="log-content">
-                                {% if not lines %}
-                                    <pre>No logs available in last scan or during selected hash.</pre>
-                                {% else %}
-                                    <pre>{% for line in lines %}{{ line }}{% endfor %}</pre>
-                                {% endif %}
-                            </div>
-                        </details>
-                    </div>
-                {% endfor %}
-            {% endif %}
-        </div>
 
-        <div class="chain">
-            <h2>Crypto Chain</h2>
-            <p>This section will display the cryptographic chain of log entries, showing how each log is linked to the previous one to ensure immutability and tamper-evidence.</p>
-            <!-- Fake Chain Visualization show below -->
-            <div class="chain-visualization">
-                <div class="chain-entry">
-                    <p><strong>Log Entry 1:</strong> Hash: abc123 | Prev Hash: 000000 | Timestamp: 2024-06-01 12:00:00</p>
-                </div>
-                <div class="chain-entry">
-                    <p><strong>Log Entry 2:</strong> Hash: def456 | Prev Hash: abc123 | Timestamp: 2024-06-01 12:01:00</p>
-                </div>
-                <div class="chain-entry">
-                    <p><strong>Log Entry 3:</strong> Hash: ghi789 | Prev Hash: def456 | Timestamp: 2024-06-01 12:02:00</p>
-                </div>
-                <div class="chain-entry">
-                    <p><strong>Log Entry 1:</strong> Hash: abc123 | Prev Hash: 000000 | Timestamp: 2024-06-01 12:00:00</p>
-                </div>
-                <div class="chain-entry">
-                    <p><strong>Log Entry 2:</strong> Hash: def456 | Prev Hash: abc123 | Timestamp: 2024-06-01 12:01:00</p>
-                </div>
-                <div class="chain-entry">
-                    <p><strong>Log Entry 3:</strong> Hash: ghi789 | Prev Hash: def456 | Timestamp: 2024-06-01 12:02:00</p>
-                </div>
-                <div class="chain-entry">
-                    <p><strong>Log Entry 1:</strong> Hash: abc123 | Prev Hash: 000000 | Timestamp: 2024-06-01 12:00:00</p>
-                </div>
-                <div class="chain-entry">
-                    <p><strong>Log Entry 2:</strong> Hash: def456 | Prev Hash: abc123 | Timestamp: 2024-06-01 12:01:00</p>
-                </div>
-                <div class="chain-entry">
-                    <p><strong>Log Entry 3:</strong> Hash: ghi789 | Prev Hash: def456 | Timestamp: 2024-06-01 12:02:00</p>
-                </div>
-                <div class="chain-entry">
-                    <p><strong>Log Entry 1:</strong> Hash: abc123 | Prev Hash: 000000 | Timestamp: 2024-06-01 12:00:00</p>
-                </div>
-                <div class="chain-entry">
-                    <p><strong>Log Entry 2:</strong> Hash: def456 | Prev Hash: abc123 | Timestamp: 2024-06-01 12:01:00</p>
-                </div>
-                <div class="chain-entry">
-                    <p><strong>Log Entry 3:</strong> Hash: ghi789 | Prev Hash: def456 | Timestamp: 2024-06-01 12:02:00</p>
-                </div>
-                <div class="chain-entry">
-                    <p><strong>Log Entry 1:</strong> Hash: abc123 | Prev Hash: 000000 | Timestamp: 2024-06-01 12:00:00</p>
-                </div>
-                <div class="chain-entry">
-                    <p><strong>Log Entry 2:</strong> Hash: def456 | Prev Hash: abc123 | Timestamp: 2024-06-01 12:01:00</p>
-                </div>
-                <div class="chain-entry">
-                    <p><strong>Log Entry 3:</strong> Hash: ghi789 | Prev Hash: def456 | Timestamp: 2024-06-01 12:02:00</p>
-                </div>
-                <div class="chain-entry">
-                    <p><strong>Log Entry 1:</strong> Hash: abc123 | Prev Hash: 000000 | Timestamp: 2024-06-01 12:00:00</p>
-                </div>
-                <div class="chain-entry">
-                    <p><strong>Log Entry 2:</strong> Hash: def456 | Prev Hash: abc123 | Timestamp: 2024-06-01 12:01:00</p>
-                </div>
-                <div class="chain-entry">
-                    <p><strong>Log Entry 3:</strong> Hash: ghi789 | Prev Hash: def456 | Timestamp: 2024-06-01 12:02:00</p>
-                </div>
-                <div class="chain-entry">
-                    <p><strong>Log Entry 1:</strong> Hash: abc123 | Prev Hash: 000000 | Timestamp: 2024-06-01 12:00:00</p>
-                </div>
-                <div class="chain-entry">
-                    <p><strong>Log Entry 2:</strong> Hash: def456 | Prev Hash: abc123 | Timestamp: 2024-06-01 12:01:00</p>
-                </div>
-                <div class="chain-entry">
-                    <p><strong>Log Entry 3:</strong> Hash: ghi789 | Prev Hash: def456 | Timestamp: 2024-06-01 12:02:00</p>
-                </div>
+        <!-- LEFT: LOG DISPLAY -->
+        <div class="log" id="log-panel">
+            <h2>Container Logs</h2>
+            <div id="log-content">
+                <p>Select a block to view logs.</p>
             </div>
         </div>
+
+        <!-- RIGHT: BLOCKCHAIN -->
+        <div class="chain">
+            <h2>Crypto Chain</h2>
+            <div class="chain-visualization" id="chain-panel">
+                <!-- dynamically filled -->
+            </div>
+        </div>
+
     </div>
 
     <script src="{{ url_for('static', filename='index.js') }}"></script>

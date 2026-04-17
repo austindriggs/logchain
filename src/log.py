@@ -2,6 +2,7 @@
 # right now, this is scheduled for SCAN_INTERVAL_MINUTES or every 10 minutes
 
 
+
 ##############################################################################
 # IMPORT MODULES AND SETUP DICTIONARY
 ##############################################################################
@@ -12,7 +13,8 @@ import docker
 from apscheduler.schedulers.background import BackgroundScheduler
 
 captured_logs = {}
-SCAN_INTERVAL_MINUTES = os.getenv("SCAN_INTERVAL_MINUTES", 10)
+SCAN_INTERVAL_MINUTES = os.getenv("SCAN_INTERVAL_MINUTES", 1)
+
 
 
 ##############################################################################
@@ -36,7 +38,7 @@ def get_logs():
         for container in containers:
             print(f"Getting logs for {container.name} ({container.id})")
             try:
-                new_logs[container.name] = container.logs(since=one_minute_ago).decode('utf-8')
+                new_logs[container.name] = container.logs().decode('utf-8')
             except Exception as e:
                 print(f"Error getting logs for {container.name}: {e}")
 
@@ -45,12 +47,22 @@ def get_logs():
     except Exception as e:
         captured_logs = {}
         print(f"Error in background log capture: {e}")
-            
+    
     return captured_logs
 
 
+
 # this runs as soon as 'import log' happens in app.py
+def scheduled_job():
+    get_logs()
+
+    import chain  # runtime import avoids circular import
+    chain.add_block()
+
 scheduler = BackgroundScheduler()
-scheduler.add_job(func=get_logs, trigger="interval", minutes=SCAN_INTERVAL_MINUTES)
+scheduler.add_job(
+    func=scheduled_job,
+    trigger="interval",
+    minutes=SCAN_INTERVAL_MINUTES
+)
 scheduler.start()
-get_logs()
