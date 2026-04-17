@@ -75,8 +75,9 @@ You need to be in a Linux (Debian/Ubuntu) or WSL environment.
 Run the following commands:
 ```bash
 git clone https://github.com/austindriggs/logchain.git
+cd logchain
 cp .env-example .env
-./run.sh <sim|dev>
+./run.sh
 ```
 
 Once the container is running, LogChain will begin indexing existing logs and watching for new events. You can view the web interface at http://localhost:5000. Run `docker-compose down` when finished.
@@ -94,4 +95,4 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## AI DISCLOSURE
 
-AI assistance was used in styling the webpages **only** (files in src/static/). Nothing else was *vibe coded*.
+AI assistance was used in styling the webpages **only**. Nothing else was *vibe coded*.
