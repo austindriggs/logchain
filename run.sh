@@ -1,14 +1,36 @@
 #!/bin/bash
 
-# shut everything down from last time
-cd tools/ && docker compose down --remove-orphans
-cd ../ && docker-compose down --remove-orphans
+## SETUP VARIABLES
 
-# start everything back up
-cd tools/ && docker-compose up -d --build
-cd ../ && docker-compose up -d --build
+PATH_ROOT=$(pwd)
+PATH_TO_SIM="$PATH_ROOT/demo/sim/"
 
-# open app(s)
+MODE=$1
+
+
+## STOP THE APP(S)
+
+if [ "$MODE" == "stop" ]; then
+    cd $PATH_TO_SIM && docker compose down --remove-orphans
+    cd $PATH_ROOT && docker-compose down --remove-orphans
+    exit 0
+fi
+
+
+## RUN THE APP(S)
+
+if [ "$MODE" == "sim" ]; then
+    echo "Running simulation..."
+    cd $PATH_TO_SIM && docker compose up -d --build
+    cd $PATH_ROOT
+fi
+
+echo "Running LogChain..."
+docker-compose up -d --build
+
+
+## OPEN THE APPS
+
 sleep 5
 wslview http://localhost:8047
 sleep 3

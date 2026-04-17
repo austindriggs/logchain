@@ -9,6 +9,8 @@
 
 LogChain continuously monitors Docker container logs, cryptographically chains each log entry to preserve an immutable record, and alerts administrators when suspicious activity or log tampering is detected.
 
+![dashboard](docs/dashboard.png)
+
 This system provides three main features that make it unique from other solutions:
 1. Written in Python and runs in [Docker](https://www.docker.com/), providing flexibility for small servers, edge devices, and [homelabs](https://github.com/austindriggs/homelab/).
 2. Provides hashing using [hashlib](https://docs.python.org/3/library/hashlib.html) (SHA-265), a user interface using [Flask](https://flask.palletsprojects.com/) and an alerting system using [ntfy](https://ntfy.sh/).
@@ -68,25 +70,13 @@ I --> L
 
 ## QUICK START
 
-Edit the docker-compose.yml file to your liking. You can configure log levels, alerting rules, and storage paths. To test and startup, you can use:
-```yaml
-services:
-  logchain-web:
-    build: .
-    ports:
-      - "5000:5000"
-    container_name: logchain_web
-    restart: unless-stopped
-```
+You need to be in a Linux (Debian/Ubuntu) or WSL environment.
 
-Also create your own `.env` file:
+Run the following commands:
 ```bash
+git clone https://github.com/austindriggs/logchain.git
 cp .env-example .env
-```
-
-Ensure you have Docker (and Docker Compose) installed. Run:
-```sh
-docker-compose up --build
+./run.sh <sim|dev>
 ```
 
 Once the container is running, LogChain will begin indexing existing logs and watching for new events. You can view the web interface at http://localhost:5000. Run `docker-compose down` when finished.
