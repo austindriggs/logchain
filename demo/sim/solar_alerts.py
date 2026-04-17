@@ -2,7 +2,7 @@
 # handles detection of solar-related faults and sends alerts
 
 import time
-import alert
+from src import alert, log
 
 # simple debounce to prevent alert spam
 last_alert_time = {
@@ -50,3 +50,8 @@ def check_solar_alerts(new_logs):
                         priority=5
                     )
                     last_alert_time["low_voltage"] = now
+
+
+if __name__ == '__main__':
+    new_logs = log.get_logs
+    check_solar_alerts(new_logs)

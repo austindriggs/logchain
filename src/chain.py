@@ -9,7 +9,7 @@ import hashlib
 import log
 import json
 import os
-import solar_alerts
+#import solar_alerts
 
 
 
@@ -101,7 +101,7 @@ def add_block():
     if all(v.strip() == "" for v in new_logs.values()):
         return
     # Comment out to remove solar alerts
-    solar_alerts.check_solar_alerts(new_logs)
+    #solar_alerts.check_solar_alerts(new_logs)
     
     timestamp = datetime.datetime.utcnow().isoformat()
     previous_hash = get_latest_hash()

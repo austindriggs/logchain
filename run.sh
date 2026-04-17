@@ -11,7 +11,7 @@ MODE=$1
 ## STOP THE APP(S)
 
 if [ "$MODE" == "stop" ]; then
-    cd $PATH_TO_SIM && docker compose down --remove-orphans
+    cd $PATH_TO_SIM && docker-compose down --remove-orphans
     cd $PATH_ROOT && docker-compose down --remove-orphans
     exit 0
 fi
@@ -21,7 +21,7 @@ fi
 
 if [ "$MODE" == "sim" ]; then
     echo "Running simulation..."
-    cd $PATH_TO_SIM && docker compose up -d --build
+    cd $PATH_TO_SIM && docker-compose up -d --build
     cd $PATH_ROOT
 fi
 
