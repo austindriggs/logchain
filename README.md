@@ -80,7 +80,15 @@ cp .env-example .env
 ./run.sh
 ```
 
-Once the container is running, LogChain will begin indexing existing logs and watching for new events. You can view the web interface at http://localhost:5000. Run `docker-compose down` when finished.
+To run the demo simulation, run:
+```bash
+./run.sh sim
+```
+
+To stop everything, run:
+```bash
+./run.sh stop
+```
 
 
 ## CONTRIBUTING

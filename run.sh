@@ -27,6 +27,8 @@ fi
 
 echo "Running LogChain..."
 docker-compose up -d --build
+echo "LogChain running at https://localhost:8016"
+echo "ntfy running at https://localhost:8047"
 
 
 ## OPEN THE APPS
