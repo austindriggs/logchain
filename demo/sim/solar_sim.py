@@ -31,4 +31,4 @@ while True:
     print(f"{timestamp} SOLAR voltage={voltage}V current={current}A power={power}W status={status}", flush=True)
 
     t += 0.1
-    time.sleep(2)
+    time.sleep(5)
