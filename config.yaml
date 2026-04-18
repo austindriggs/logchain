@@ -9,7 +9,7 @@ global_rules:
 
 # Scopes rules to specific container name patterns
 scoped_rules:
-  solar:
+  solar-log-producer:
     - keyword: "OVERCURRENT"
       title: "Solar Fault: Overcurrent"
       priority: 5

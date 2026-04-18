@@ -20,8 +20,8 @@ import secrets
 load_dotenv()
 
 # import local modules
-import log, alert, chain, detect
-detect.load_config()
+import log, alert, chain, alert
+alert.load_config()
 
 
 

@@ -12,7 +12,7 @@ import datetime
 import docker
 from apscheduler.schedulers.background import BackgroundScheduler
 
-import detect
+import alert
 
 captured_logs = {}
 SCAN_INTERVAL_MINUTES = os.getenv("SCAN_INTERVAL_MINUTES", 1)
@@ -50,7 +50,7 @@ def get_logs():
         captured_logs = {}
         print(f"Error in background log capture: {e}")
 
-    detect.process_logs(captured_logs)
+    alert.process_logs(captured_logs)
     
     return captured_logs
 
