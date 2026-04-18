@@ -1,0 +1,18 @@
+# Global rules check EVERY container
+global_rules:
+  - keyword: "sudo"
+    title: "Security Alert: Sudo Usage"
+    priority: 4
+  - keyword: "rm -rf"
+    title: "Critical: Directory Deletion"
+    priority: 5
+
+# Scopes rules to specific container name patterns
+scoped_rules:
+  solar:
+    - keyword: "OVERCURRENT"
+      title: "Solar Fault: Overcurrent"
+      priority: 5
+    - keyword: "LOW_VOLTAGE"
+      title: "Solar Fault: Low Voltage"
+      priority: 4

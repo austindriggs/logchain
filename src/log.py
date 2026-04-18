@@ -50,7 +50,7 @@ def get_logs():
         captured_logs = {}
         print(f"Error in background log capture: {e}")
 
-    detect.check_solar_alerts(captured_logs)
+    detect.process_logs(captured_logs)
     
     return captured_logs
 
