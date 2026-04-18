@@ -12,6 +12,8 @@ import datetime
 import docker
 from apscheduler.schedulers.background import BackgroundScheduler
 
+import detect
+
 captured_logs = {}
 SCAN_INTERVAL_MINUTES = os.getenv("SCAN_INTERVAL_MINUTES", 1)
 
@@ -47,6 +49,8 @@ def get_logs():
     except Exception as e:
         captured_logs = {}
         print(f"Error in background log capture: {e}")
+
+    detect.check_solar_alerts(captured_logs)
     
     return captured_logs
 

@@ -59,40 +59,29 @@ services:
         sleep 2;
       done"
     restart: always
-
-  solar-alert-trigger:
-    image: python:3.11-slim
-    container_name: solar-alert-producer
-    working_dir: /app
-    environment:
-      - PYTHONPATH=/app
-    volumes:
-      - .:/app
-    command: >
-      sh -c "while true; do
-        python solar_alerts.py;
-        sleep 60;
-      done"
-    restart: always
     
   solar-sim:
-    image: python:3.11-slim
+    build:
+      context: ../../
+      dockerfile: Dockerfile
     container_name: solar-log-producer
     working_dir: /app
     environment:
       - PYTHONPATH=/app
     volumes:
-      - .:/app
-    command: python solar_sim.py
+      - ../../:/app
+    command: python demo/sim/solar_sim.py
     restart: always
     
   cloud-sim:
-    image: python:3.11-slim
+    build:
+      context: ../../
+      dockerfile: Dockerfile
     container_name: cloud-log-producer
     working_dir: /app
     environment:
       - PYTHONPATH=/app
     volumes:
-      - .:/app
-    command: python cloud_sim.py
+      - ../../:/app
+    command: python demo/sim/cloud_sim.py
     restart: always
