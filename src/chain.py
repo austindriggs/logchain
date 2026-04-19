@@ -146,7 +146,7 @@ def validate_chain():
 
 
 def get_chain():
-    return chain
+    return chain[::-1]
 
 
 

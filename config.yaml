@@ -1,0 +1,62 @@
+# Global rules check EVERY container
+global_rules:
+  - keyword: "sudo"
+    title: "Security Alert: Sudo Usage"
+    priority: 4
+  - keyword: "rm -rf"
+    title: "Critical: Directory Deletion"
+    priority: 5
+  - keyword: "Permission denied"
+    title: "System Error: Permission Denied"
+    priority: 3
+  - keyword: "Connection refused"
+    title: "Network Error: Connection Refused"
+    priority: 3
+  - keyword: "Segmentation fault"
+    title: "Critical: Memory Segmentation Fault"
+    priority: 5
+  - keyword: "Out of memory"
+    title: "System Error: OOM Killer Triggered"
+    priority: 5
+  - keyword: "Login fail"
+    title: "Security: Failed Login Attempt"
+    priority: 4
+  - keyword: "Invalid API Key"
+    title: "Security: Unauthorized API Access"
+    priority: 4
+  - keyword: "Database connection failed"
+    title: "Service Error: DB Unreachable"
+    priority: 4
+  - keyword: "Disk full"
+    title: "Hardware: Disk Space Exhausted"
+    priority: 5
+  - keyword: "SSL certificate expired"
+    title: "Security: SSL Expiry Warning"
+    priority: 3
+  - keyword: "killed"
+    title: "Process: Container Process Terminated"
+    priority: 3
+  - keyword: "404"
+    title: "Web Error: Resource Not Found"
+    priority: 1
+
+
+
+# Scopes rules to specific container name patterns
+scoped_rules:
+
+  solar-log-producer:
+    - keyword: "OVERCURRENT"
+      title: "Solar Fault: Overcurrent"
+      priority: 5
+    - keyword: "LOW_VOLTAGE"
+      title: "Solar Fault: Low Voltage"
+      priority: 4
+
+  cloud-log-producer:
+    - keyword: "OVERCAST"
+      title: "Solar Defficiency: Cloudy Day :("
+      priority: 2
+    - keyword: "SUNNY"
+      title: "Solar Efficiency: Sunny Day!"
+      priority: 1

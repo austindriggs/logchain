@@ -12,6 +12,7 @@ services:
       - ${LOGCHAIN_PATH}/config/:/app/config/
       - ${LOGCHAIN_PATH}/data/:/app/data/
       - ${LOGCHAIN_PATH}/logs/:/app/logs/
+      - ./config.yaml:/app/config.yaml
     environment:
       - LOGCHAIN_SCAN_MINUTES=${LOGCHAIN_SCAN_MINUTES}
       - NTFY_URL=${NTFY_URL}
