@@ -74,9 +74,8 @@ You need to be in a Linux (Debian/Ubuntu) or WSL environment.
 
 Run the following commands:
 ```bash
-git clone https://github.com/austindriggs/logchain.git
-cd logchain
-cp .env-example .env
+git clone https://github.com/austindriggs/logchain.git && cd logchain
+cp .env-example .env && nano .env
 ./run.sh
 ```
 

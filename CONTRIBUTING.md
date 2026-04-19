@@ -8,6 +8,7 @@ Thanks for contributing! Please keep some of these guidelines in mind when setti
 Clone (using HTTPS):
 ```sh
 git clone https://github.com/austindriggs/logchain.git
+cd logchain
 ```
 
 ## Install Docker for your Environment
@@ -60,7 +61,6 @@ sudo usermod -aG docker $USER
 
 Checkout your own branch:
 ```sh
-cd logchain
 git checkout -b <your-branch-name>
 ```
 
@@ -74,27 +74,58 @@ driggs@driggs-HP-PD:~/code/logchain$ tree
 ├── Dockerfile
 ├── LICENSE.md
 ├── README.md
-├── TODO.md
-├── cpe493
-│   ├── README.md
-│   ├── proposal.md
-│   └── status-260324.md
+├── config.yaml
+├── demo
+│   ├── hardware
+│   │   ├── main.py
+│   │   └── pico_reader.py
+│   └── sim
+│       ├── cloud_sim.py
+│       ├── docker-compose.yml
+│       └── solar_sim.py
 ├── docker-compose.yml
-├── logchain.yaml
 ├── requirements.txt
-├── src
-│   ├── __init__.py
-│   ├── alert.py
-│   ├── app.py
-│   ├── chain.py
-│   └── log.py
-└── tools
-    ├── inject.py
-    ├── tamper.py
-    └── verify.py
+├── run.sh
+└── src
+    ├── __init__.py
+    ├── alert.py
+    ├── app.py
+    ├── chain.py
+    ├── log.py
+    ├── static
+    │   ├── about.css
+    │   ├── alert.css
+    │   ├── index.css
+    │   ├── index.js
+    │   └── theme.css
+    └── templates
+        ├── about.html
+        ├── alert.html
+        ├── chain.html
+        └── index.html
 ```
 
 ## Run the Container
+
+### Run using the run script (recommended)
+
+To run the app:
+```bash
+./run.sh
+```
+
+To run the simulations:
+```bash
+./run.sh sim
+```
+
+To stop everything:
+```bash
+./run.sh stop
+```
+
+
+### Running your own commands (not recommended)
 
 Build and run the container:
 ```sh
