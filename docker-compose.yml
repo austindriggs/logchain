@@ -1,8 +1,8 @@
 services:
-  
+
   logchain:
     container_name: logchain
-    depends_on: 
+    depends_on:
       - ntfy
     build: .
     ports:
@@ -33,12 +33,3 @@ services:
     ports:
       - 8047:80
     restart: unless-stopped
-
-   # pico-reader:
-      #build: .
-      #container_name: pico-log-reader
-      #command: python hardware/pico_reader.py
-      #devices:
-        #- "/dev/ttyACM0:/dev/ttyACM0"
-      #privileged: true
-      #restart: always
