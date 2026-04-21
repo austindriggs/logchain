@@ -9,7 +9,8 @@
 
 LogChain continuously monitors Docker container logs, cryptographically chains each log entry to preserve an immutable record, and alerts administrators when suspicious activity or log tampering is detected.
 
-![dashboard](docs/dashboard.png)
+![dashboard](demo/imgs/dashboard.png) \
+![ntfy](demo/imgs/ntfy.png)
 
 This system provides three main features that make it unique from other solutions:
 1. Written in Python and runs in [Docker](https://www.docker.com/), providing flexibility for small servers, edge devices, and [homelabs](https://github.com/austindriggs/homelab/).
@@ -75,8 +76,8 @@ You need to be in a Linux (Debian/Ubuntu) or WSL environment.
 Run the following commands:
 ```bash
 git clone https://github.com/austindriggs/logchain.git && cd logchain
-cp .env-example .env && nano .env
-./run.sh
+cp .env-example .env && nano .env # to change your IP
+./run.sh # or './run.sh sim' to run demo simulations
 ```
 
 To run the demo simulation, run:
@@ -92,12 +93,12 @@ To stop everything, run:
 
 ## CONTRIBUTING
 
-See [CONTRIBUTING](CONTRIBUTING).
+See [CONTRIBUTING](CONTRIBUTING.md).
 
 
 ## LICENSE
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the [MIT License](LICENSE.md).
 
 
 ## AI DISCLOSURE
