@@ -3,17 +3,13 @@
 Thanks for contributing! Please keep some of these guidelines in mind when setting up, coding, and building!
 
 
-## Setup the Repo
+## INSTALL DOCKER FOR YOUR ENVIRONMENT
 
-Clone (using HTTPS):
-```sh
-git clone https://github.com/austindriggs/logchain.git
-cd logchain
-```
-
-## Install Docker for your Environment
+### DOCKER'S OFFICIAL INSTALLATION
 
 For the most up to date instructions, follow the official [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/). 
+
+### COMMANDS I RAN
 
 Run the following command to uninstall all conflicting packages:
 ```sh
@@ -57,75 +53,44 @@ sudo usermod -aG docker $USER
 ```
 
 
-## Making your Changes
+## UNDERSTANDING THE ARCHITECTURE
 
-Checkout your own branch:
+![logchain](demo/imgs/logchain.drawio.png)
+
+
+
+## SETUP THE REPO
+
+Clone (using HTTPS):
 ```sh
+git clone https://github.com/austindriggs/logchain.git
+cd logchain
 git checkout -b <your-branch-name>
 ```
 
-> Keep the branches short and code reviews often.
-
-A description of the files is found below:
-```sh
-driggs@driggs-HP-PD:~/code/logchain$ tree
-.
-├── CONTRIBUTING.md
-├── Dockerfile
-├── LICENSE.md
-├── README.md
-├── config.yaml
-├── demo
-│   ├── hardware
-│   │   ├── main.py
-│   │   └── pico_reader.py
-│   └── sim
-│       ├── cloud_sim.py
-│       ├── docker-compose.yml
-│       └── solar_sim.py
-├── docker-compose.yml
-├── requirements.txt
-├── run.sh
-└── src
-    ├── __init__.py
-    ├── alert.py
-    ├── app.py
-    ├── chain.py
-    ├── log.py
-    ├── static
-    │   ├── about.css
-    │   ├── alert.css
-    │   ├── index.css
-    │   ├── index.js
-    │   └── theme.css
-    └── templates
-        ├── about.html
-        ├── alert.html
-        ├── chain.html
-        └── index.html
-```
-
-## Run the Container
-
-### Run using the run script (recommended)
-
-To run the app:
+Change your environment variables and configuration:
 ```bash
-./run.sh
+cp .env-example .env && nano .env # to change your IP
+nano config.yml # to change any keywords
 ```
 
-To run the simulations:
+## RUN THE CONTAINER
+
+You need to be in a Linux (Debian/Ubuntu) or WSL environment with Docker installed.
+
+### RUN USING THE SCRIPT (RECOMMENDED)
+
+To run both LogChain and ntfy:
 ```bash
-./run.sh sim
+./run.sh         # run the apps
+./run.sh sim     # run with simulations
+./run.sh stop    # stop everything
 ```
 
-To stop everything:
-```bash
-./run.sh stop
-```
+After running, you can then navigate to `https://localhost:8016` to view the dashboard.
 
 
-### Running your own commands (not recommended)
+### RUN USING COMMANDS (NOT RECOMMENDED)
 
 Build and run the container:
 ```sh
@@ -146,7 +111,7 @@ docker-compose down
 ```
 
 
-## Submitting Changes
+## SUBMITTING CHANGES
 
 - Again, keep your branches short and code reviews often.
 - Commit specific changes with descriptive messages.

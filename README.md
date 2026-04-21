@@ -25,29 +25,21 @@ This system provides three main features that make it unique from other solution
 
 ## QUICK START
 
-You need to be in a Linux (Debian/Ubuntu) or WSL environment.
+You need to be in a Linux (Debian/Ubuntu) or WSL environment with Docker installed.
 
 Run the following commands:
 ```bash
 git clone https://github.com/austindriggs/logchain.git && cd logchain
 cp .env-example .env && nano .env # to change your IP
-./run.sh # or './run.sh sim' to run demo simulations
+./run.sh [sim | stop] # optional arguments
 ```
 
-To run the demo simulation, run:
-```bash
-./run.sh sim
-```
-
-To stop everything, run:
-```bash
-./run.sh stop
-```
+You can then navigate to `https://localhost:8016` to view the dashboard.
 
 
 ## CONTRIBUTING
 
-See [CONTRIBUTING](CONTRIBUTING.md).
+See [CONTRIBUTING](CONTRIBUTING.md) to learn more about the project or fork for yourself.
 
 
 ## LICENSE
