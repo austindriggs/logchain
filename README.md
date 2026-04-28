@@ -17,6 +17,8 @@ This system provides three main features that make it unique from other solution
 2. Provides hashing using [hashlib](https://docs.python.org/3/library/hashlib.html) (SHA-265), a user interface using [Flask](https://flask.palletsprojects.com/) and an alerting system using [ntfy](https://ntfy.sh/).
 3. Free and open sourced, allowing users to preserve, backup, and restore their own data as they please.
 
+Click [here to watch the demo](https://youtu.be/lUNNUGshCoo) on YouTube!
+
 
 ## ARCHITECTURE
 
